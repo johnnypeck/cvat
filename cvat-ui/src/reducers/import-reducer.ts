@@ -12,7 +12,7 @@ const core = getCore();
 
 const defaultProgress = 0.0;
 
-export function defineActititiesField(instance: any): 'projects' | 'tasks' | 'jobs' {
+export function defineActivitiesField(instance: any): 'projects' | 'tasks' | 'jobs' {
     if (instance instanceof core.classes.Project) {
         return 'projects';
     }
@@ -56,7 +56,7 @@ export default (state: ImportState = defaultState, action: ImportActions): Impor
     switch (action.type) {
         case ImportActionTypes.OPEN_IMPORT_DATASET_MODAL: {
             const { instance } = action.payload;
-            const activitiesField = defineActititiesField(instance);
+            const activitiesField = defineActivitiesField(instance);
 
             return {
                 ...state,
@@ -73,7 +73,7 @@ export default (state: ImportState = defaultState, action: ImportActions): Impor
         }
         case ImportActionTypes.CLOSE_IMPORT_DATASET_MODAL: {
             const { instance } = action.payload;
-            const activitiesField = defineActititiesField(instance);
+            const activitiesField = defineActivitiesField(instance);
 
             return {
                 ...state,
@@ -90,7 +90,7 @@ export default (state: ImportState = defaultState, action: ImportActions): Impor
         case ImportActionTypes.IMPORT_DATASET: {
             const { format, instance } = action.payload;
 
-            const activitiesField = defineActititiesField(instance);
+            const activitiesField = defineActivitiesField(instance);
 
             let updatedActivity: {
                 format: string;
@@ -121,7 +121,7 @@ export default (state: ImportState = defaultState, action: ImportActions): Impor
         case ImportActionTypes.IMPORT_DATASET_UPDATE_STATUS: {
             const { progress, status, instance } = action.payload;
 
-            const activitiesField = defineActititiesField(instance);
+            const activitiesField = defineActivitiesField(instance);
             return {
                 ...state,
                 [activitiesField]: {
@@ -143,7 +143,7 @@ export default (state: ImportState = defaultState, action: ImportActions): Impor
         case ImportActionTypes.IMPORT_DATASET_FAILED:
         case ImportActionTypes.IMPORT_DATASET_SUCCESS: {
             const { instance } = action.payload;
-            const activitiesField = defineActititiesField(instance);
+            const activitiesField = defineActivitiesField(instance);
             const { current } = state[activitiesField].dataset;
 
             return {

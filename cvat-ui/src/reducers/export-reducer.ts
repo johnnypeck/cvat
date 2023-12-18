@@ -8,7 +8,7 @@ import { omit } from 'lodash';
 import deepCopy from 'utils/deep-copy';
 
 import { ExportState } from '.';
-import { defineActititiesField } from './import-reducer';
+import { defineActivitiesField } from './import-reducer';
 
 const defaultState: ExportState = {
     projects: {
@@ -44,7 +44,7 @@ export default (state: ExportState = defaultState, action: ExportActions): Expor
     switch (action.type) {
         case ExportActionTypes.OPEN_EXPORT_DATASET_MODAL: {
             const { instance } = action.payload;
-            const activitiesField = defineActititiesField(instance);
+            const activitiesField = defineActivitiesField(instance);
 
             return {
                 ...state,
@@ -61,7 +61,7 @@ export default (state: ExportState = defaultState, action: ExportActions): Expor
         }
         case ExportActionTypes.CLOSE_EXPORT_DATASET_MODAL: {
             const { instance } = action.payload;
-            const activitiesField = defineActititiesField(instance);
+            const activitiesField = defineActivitiesField(instance);
 
             return {
                 ...state,
@@ -77,7 +77,7 @@ export default (state: ExportState = defaultState, action: ExportActions): Expor
         }
         case ExportActionTypes.EXPORT_DATASET: {
             const { instance, format } = action.payload;
-            const field = defineActititiesField(instance) as 'projects' | 'tasks' | 'jobs';
+            const field = defineActivitiesField(instance) as 'projects' | 'tasks' | 'jobs';
 
             return {
                 ...state,
@@ -97,7 +97,7 @@ export default (state: ExportState = defaultState, action: ExportActions): Expor
         case ExportActionTypes.EXPORT_DATASET_FAILED:
         case ExportActionTypes.EXPORT_DATASET_SUCCESS: {
             const { instance, format } = action.payload;
-            const field: 'projects' | 'tasks' | 'jobs' = defineActititiesField(instance);
+            const field: 'projects' | 'tasks' | 'jobs' = defineActivitiesField(instance);
             const activities = deepCopy(state[field]);
 
             activities.dataset.current[instance.id] = activities.dataset.current[instance.id].filter(
@@ -111,7 +111,7 @@ export default (state: ExportState = defaultState, action: ExportActions): Expor
         }
         case ExportActionTypes.OPEN_EXPORT_BACKUP_MODAL: {
             const { instance } = action.payload;
-            const field = defineActititiesField(instance) as 'projects' | 'tasks';
+            const field = defineActivitiesField(instance) as 'projects' | 'tasks';
 
             return {
                 ...state,
@@ -128,7 +128,7 @@ export default (state: ExportState = defaultState, action: ExportActions): Expor
         }
         case ExportActionTypes.CLOSE_EXPORT_BACKUP_MODAL: {
             const { instance } = action.payload;
-            const field = defineActititiesField(instance) as 'projects' | 'tasks';
+            const field = defineActivitiesField(instance) as 'projects' | 'tasks';
 
             return {
                 ...state,
@@ -144,7 +144,7 @@ export default (state: ExportState = defaultState, action: ExportActions): Expor
         }
         case ExportActionTypes.EXPORT_BACKUP: {
             const { instance } = action.payload;
-            const field = defineActititiesField(instance) as 'projects' | 'tasks';
+            const field = defineActivitiesField(instance) as 'projects' | 'tasks';
 
             return {
                 ...state,
@@ -164,7 +164,7 @@ export default (state: ExportState = defaultState, action: ExportActions): Expor
         case ExportActionTypes.EXPORT_BACKUP_SUCCESS: {
             const { instance } = action.payload;
 
-            const field = defineActititiesField(instance) as 'projects' | 'tasks';
+            const field = defineActivitiesField(instance) as 'projects' | 'tasks';
 
             return {
                 ...state,
